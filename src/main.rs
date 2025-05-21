@@ -17,6 +17,10 @@ fn main () {
 
     let idade = ler_idade("Qual sua idade? ");
     println!("Minha idade é: {} anos ", idade);
+
+    let tempo = tempo_experiencia("Quanto tempo de experiencia?");
+    println!("Tempode experiencia de: {} anos", tempo);
+
 }
 
 fn ler_texto (menssagem: &str) -> String {
@@ -68,4 +72,23 @@ fn ler_idade(menssagem: &str) -> i32 {
             }
         }
     }
+}
+
+fn tempo_experiencia (menssagem: &str) -> i32 {
+    let mut entrada = String::new();
+
+    while entrada.trim().parse::<i32>().is_err() {
+        print!("{}", menssagem);
+
+        io::stdout().flush().expect("Erro ao forçar saida!");
+        entrada.clear();
+        
+        io::stdin().read_line(&mut entrada).expect("Erro ao ler entrada, tente novamente!");
+
+        if entrada.trim().parse::<i32>().is_err() {
+            println!("Por favor digite um numero inteiro valido!")
+        }
+    }
+
+    entrada.trim().parse::<i32>().unwrap()
 }
